@@ -1,6 +1,6 @@
 version: "3"
 
-services: 
+services:   
   app: 
     build: .
     command: npm start
@@ -8,12 +8,21 @@ services:
       - "4000:4000"
     volumes:
       - .:/usr/src/app
-    links:
-      - mongo
-  mongo:
-    container_name: mongo
-    image: mongo
+    depends_on:
+      - mongodb
+    environment:
+      - dbhost=mongodb
+
+  mongodb:
+    image: "bitnami/mongodb:latest"
+    restart: always
     volumes:
       - ./data:/data/db
     ports:
       - "27017:27017"
+    networks:
+      - net
+    
+networks:
+  net:
+    driver: bridge

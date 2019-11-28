@@ -6,9 +6,10 @@ const path = require('path');
 const resolvers = require('./users/resolvers');
 const schema = require('./users/schema.graphql');
 
-mongoose.connect("mongodb://localhost:27017/graphqlnode", {
+mongoose.connect("mongodb://mongodb:27017/graphqlnode", {
   useNewUrlParser: true
-});
+})
+.catch(error => console.log(error));
 
 const server = new GraphQLServer({
     typeDefs: [schema],
