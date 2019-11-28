@@ -1,5 +1,7 @@
 const { GraphQLServer } = require("graphql-yoga");
 const mongoose = require("mongoose");
+// mongoose.Promise = global.Promise;
+
 const path = require('path');
 const resolvers = require('./users/resolvers');
 const schema = require('./users/schema.graphql');

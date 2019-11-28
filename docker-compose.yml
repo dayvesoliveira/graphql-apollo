@@ -5,6 +5,15 @@ services:
     build: .
     command: npm start
     ports: 
-      - "3000:3000"
+      - "4000:4000"
     volumes:
-      - .:/user/app
+      - .:/usr/src/app
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
