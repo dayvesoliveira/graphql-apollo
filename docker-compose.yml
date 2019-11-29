@@ -3,15 +3,14 @@ version: "3"
 services:   
   app: 
     build: .
-    command: npm start
+    restart: always
+    tty: true
     ports: 
       - "4000:4000"
     volumes:
       - .:/usr/src/app
     depends_on:
       - mongodb
-    environment:
-      - dbhost=mongodb
 
   mongodb:
     image: "bitnami/mongodb:latest"
@@ -20,9 +19,3 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
-    networks:
-      - net
-    
-networks:
-  net:
-    driver: bridge

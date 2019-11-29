@@ -1,12 +1,14 @@
 const { GraphQLServer } = require("graphql-yoga");
 const mongoose = require("mongoose");
-// mongoose.Promise = global.Promise;
 
-const path = require('path');
+mongoose.Promise = Promise;
+
 const resolvers = require('./users/resolvers');
 const schema = require('./users/schema.graphql');
 
-mongoose.connect("mongodb://mongodb:27017/graphqlnode", {
+const DATABASE_URL = "mongodb://mongodb";
+
+mongoose.connect(`${DATABASE_URL}/graphqlnode`, {
   useNewUrlParser: true
 })
 .catch(error => console.log(error));
